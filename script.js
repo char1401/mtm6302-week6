@@ -6,7 +6,15 @@ const $employee = {
     hireYear: 2001,
     departement: "Innovation",
     email: "jax@gmail.com",
-    skills: ["UX","Prototyping", "Research", "Documentation"]
+    skills: ["UX","Prototyping", "Research", "Documentation"],
+    address: {
+        street: "123 Street",
+        city: "Merlot"
+    },
+    selfIntro: function(){
+        const introTemplate = `Hi I am ${this.name}, I have been working in ${this.departement} since ${this.hireYear}.`
+        return introTemplate
+    }
 }
 
 const $empSection = document.getElementById("employee")
@@ -28,7 +36,24 @@ const $empInfo = `<dl>
 
 $empSection.insertAdjacentHTML("beforeend", $empInfo)
 
-// Accessing array in an object
+// Accessing an array in an object
 const $empSkills = $employee.skills
-
 $empSection.insertAdjacentHTML("beforeend", `<p>${$employee.name} is skilled in ${$empSkills.join(",")}</p>`)
+
+// Accessing an object isnide an object
+$empSection.insertAdjacentHTML("beforeend", `<p>Address: ${$employee.address.street}, ${$employee.address.city}</p>`)
+
+// Accessing an object methods
+$empSection.insertAdjacentHTML("beforeend", $employee.selfIntro())
+
+// JS object static method 
+console.log(Object.keys($employee))
+console.log(Object.values($employee))
+console.log(Object.entries($employee))
+
+// adding a new property from outside the object
+$employee.pronouns = "They/Them"
+$empSection.insertAdjacentHTML("beforeend", `${$employee.name} uses ${$employee.pronouns} as pronouns`)
+
+// deleting an object property
+delete $employee.hireMonth
